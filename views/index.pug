@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= "Dara Osunkoya"
+  p= "Building a pug server" 
+  button(type="button", class="btn btn-secondary" onclick="faster()") Press Button
+  div(id="faster")= "Add in extra"
+
+  script. 
+    let value = 1;
+    let amt = 2;
+
+    function faster(){
+      value += amt * 2;
+      faster_text = document.getElementById("faster");
+      faster_text.innerHTML = `Faster ${value} times ${amt}`;
+    }
+
+  a(href="./tattoos") Tattoos Page
