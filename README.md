@@ -2,7 +2,8 @@
 ### Pug Server
 ----------------------
 * Assignment 10
-    > Render Server: https://f25wb09osunkoya.onrender.com/
+    > Render Server: 
+    > Render Server: https://two5db09osunkoya.onrender.com
 ----------------------
 #### Class and Attributes
     > Class name: Tattoos
