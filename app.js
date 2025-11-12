@@ -14,7 +14,8 @@ var tattoosRouter = require('./routes/tattoos');
 var gridRouter = require('./routes/grid');
 var randomitemRouter = require('./routes/pick');
 var Tattoo = require('./models/tattoo');
-var resourceRouter = require('./routes/resource')
+var resourceRouter = require('./routes/resource');
+const tattoo = require('./models/tattoo');
 var app = express();
 
 // view engine setup
