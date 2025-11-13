@@ -1,7 +1,7 @@
 var Tattoo = require('../models/tattoo');
 // List of all tattoos
 exports.tattoo_list = function(req, res) {
- res.send('NOT IMPLEMENTED: Tattoo list');
+    res.send('NOT IMPLEMENTED: Tattoo list');
 };
 // for a specific Tattoo.
 exports.tattoo_detail = async function(req, res) {
@@ -25,7 +25,22 @@ exports.tattoo_delete = function(req, res) {
 };
 // Handle Tattoo update form on PUT.
 exports.tattoo_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: Tattoo update PUT' + req.params.id);
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await Tattoo.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.customer) toUpdate.customer = req.body.customer;
+    if(req.body.duration) toUpdate.duration = req.body.duration;
+    if(req.body.cost) toUpdate.cost = req.body.cost;
+    if(req.body.colored) toUpdate.colored = req.body.colored;
+    let result = await toUpdate.save();
+    console.log("Sucess " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id} 
+    failed`);
+    }
 };
 
 // List of all Tattoos
