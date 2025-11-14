@@ -27,7 +27,7 @@ exports.tattoo_delete = function(req, res) {
 exports.tattoo_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
     try {
-        let toUpdate = await Tattoo.findById( req.params.id)
+        let toUpdate = await Tattoo.findById(req.params.id)
         // Do updates of properties
         if(req.body.customer) toUpdate.customer = req.body.customer;
         if(req.body.duration) toUpdate.duration = req.body.duration;
@@ -38,8 +38,7 @@ exports.tattoo_update_put = async function(req, res) {
         res.send(result)
     } catch (err) {
         res.status(500)
-        res.send(`{"error": ${err}: Update for id ${req.params.id} 
-        failed`);
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
     }
 };
 
