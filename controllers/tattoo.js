@@ -7,11 +7,11 @@ exports.tattoo_list = function(req, res) {
 exports.tattoo_detail = async function(req, res) {
     console.log("detail" + req.params.id)
     try {
-    result = await Tattoo.findById( req.params.id)
-    res.send(result)
+        result = await Tattoo.findById( req.params.id)
+        res.send(result)
     } catch (error) {
-    res.status(500)
-    res.send(`{"error": document for id ${req.params.id} not found`);
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
 
@@ -19,10 +19,22 @@ exports.tattoo_detail = async function(req, res) {
 exports.tattoo_create_post = function(req, res) {
  res.send('NOT IMPLEMENTED: Tattoo create POST');
 };
+
 // Handle Tattoo delete from on DELETE.
 exports.tattoo_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Tattoo delete DELETE ' + req.params.id);
+    exports.tattoo_delete = async function(req, res) {
+        console.log("delete " + req.params.id)
+        try {
+            result = await Costume.findByIdAndDelete( req.params.id)
+            console.log("Removed " + result)
+            res.send(result)
+        } catch (err) {
+            res.status(500)
+            res.send(`{"error": Error deleting ${err}}`);
+        }
+    };
 };
+
 // Handle Tattoo update form on PUT.
 exports.tattoo_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
@@ -45,12 +57,12 @@ exports.tattoo_update_put = async function(req, res) {
 // List of all Tattoos
 exports.tattoo_list = async function(req, res) {
     try{
-    const theTattoos = await Tattoo.find();
-    res.send(theTattoos);
+        const theTattoos = await Tattoo.find();
+        res.send(theTattoos);
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     } 
 };
 
@@ -60,10 +72,10 @@ exports.tattoo_view_all_Page = async function(req, res) {
     try{
         const theTattoos = await Tattoo.find();
         res.render('tattoos', { title: 'Tattoo Search Results', results: theTattoos });
-        }
-        catch(err){
-            res.status(500);
-            res.send(`{"error": ${err}}`);
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }  
 };
 
@@ -80,8 +92,8 @@ exports.tattoo_create_post = async function(req, res) {
     try{
         let result = await document.save();
         res.send(result);
-        }
-        catch(err){
+    }
+    catch(err){
         res.status(500);
         res.send(`{"error": ${err}}`);
     } 
