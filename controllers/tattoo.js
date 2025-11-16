@@ -3,6 +3,7 @@ var Tattoo = require('../models/tattoo');
 exports.tattoo_list = function(req, res) {
     res.send('NOT IMPLEMENTED: Tattoo list');
 };
+
 // for a specific Tattoo.
 exports.tattoo_detail = async function(req, res) {
     console.log("detail" + req.params.id)
@@ -21,19 +22,18 @@ exports.tattoo_create_post = function(req, res) {
 };
 
 // Handle Tattoo delete from on DELETE.
-exports.tattoo_delete = function(req, res) {
-    exports.tattoo_delete = async function(req, res) {
-        console.log("delete " + req.params.id)
-        try {
-            result = await Costume.findByIdAndDelete( req.params.id)
-            console.log("Removed " + result)
-            res.send(result)
-        } catch (err) {
-            res.status(500)
-            res.send(`{"error": Error deleting ${err}}`);
-        }
-    };
+exports.tattoo_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Tattoo.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 
 // Handle Tattoo update form on PUT.
 exports.tattoo_update_put = async function(req, res) {

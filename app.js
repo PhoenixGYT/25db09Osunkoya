@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
+
 const connectionString = "mongodb+srv://dara:wRR7amVQkGxV5hdZ@learnmongo.xtbuwaz.mongodb.net/?appName=learnMongo";
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
