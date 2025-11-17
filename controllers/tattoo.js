@@ -1,8 +1,4 @@
 var Tattoo = require('../models/tattoo');
-// List of all tattoos
-exports.tattoo_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Tattoo list');
-};
 
 // for a specific Tattoo.
 exports.tattoo_detail = async function(req, res) {
@@ -16,16 +12,11 @@ exports.tattoo_detail = async function(req, res) {
     }
 };
 
-// Handle Tattoo create on POST.
-exports.tattoo_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: Tattoo create POST');
-};
-
 // Handle Tattoo delete from on DELETE.
 exports.tattoo_delete = async function(req, res) {
     console.log("delete " + req.params.id)
     try {
-        result = await Tattoo.findByIdAndDelete( req.params.id)
+        result = await Tattoo.findByIdAndDelete(req.params.id)
         console.log("Removed " + result)
         res.send(result)
     } catch (err) {
@@ -97,4 +88,17 @@ exports.tattoo_create_post = async function(req, res) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     } 
+};
+
+// Handle a show one view with id specified by query
+exports.tattoo_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+        result = await Costume.findById( req.query.id)
+        res.render('tattoodetail', { title: 'Tattoo Detail', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
 };
