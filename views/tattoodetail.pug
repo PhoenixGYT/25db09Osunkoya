@@ -2,23 +2,23 @@ extends layout
 block content
     h1= title
         - let tattoo_id = toShow._id
-        - let tattoo_customer = toShow.tattoo_customer
-        - let tattoo_duration = toShow.tattoo_duration
-        - let tattoo_cost = toShow.tattoo_cost
-        - let tattoo_colored = toShow.tattoo_colored
+        - let tattoocustomer = toShow.customer
+        - let tattooduration = toShow.duration
+        - let tattoocost = toShow.cost
+        - let tattoocolored = toShow.colored
         div
-        div.row
-        div(class='tattooAttr mr-3') Tattoo ID is:
-        div #{tattoo_id}
-        div.row
-        div(class='tattooAttr mr-3') Customer is:
-        div #{tattoo_customer}
-        div.row
-        div(class='tattooAttr mr-3') Duration is:
-        div #{tattoo_duration}
-        div.row
-        div(class='tattooAttr mr-3') Cost is:
-        div #{tattoo_cost}
-        div.row
-        div(class='tattooAttr mr-3') Colored? 
-        div #{tattoo_colored}
+            div.row
+                div(class='tattooAttr mr-3') Tattoo ID is:
+                div #{tattoo_id}
+            div.row
+                div(class='tattooAttr mr-3') Customer is:
+                div #{tattoocustomer}
+            div.row
+                div(class='tattooAttr mr-3') Duration is:
+                div #{tattooduration}
+            div.row
+                div(class='tattooAttr mr-3') Cost is:
+                div #{tattoocost}
+            div.row
+                div(class='tattooAttr mr-3') Colored? 
+                div #{tattoocolored}

@@ -8,5 +8,7 @@ router.get('/', tattoo_controllers.tattoo_view_all_Page);
 /* GET detail tattoo page */
 router.get('/detail', tattoo_controllers.tattoo_view_one_Page);
 
+/* GET create tattoo page */
+router.get('/create', tattoo_controllers.tattoo_create_Page);
 
 module.exports = router;

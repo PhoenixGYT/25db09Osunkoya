@@ -94,8 +94,22 @@ exports.tattoo_create_post = async function(req, res) {
 exports.tattoo_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
-        result = await Costume.findById( req.query.id)
+        result = await Tattoo.findById( req.query.id)
         res.render('tattoodetail', { title: 'Tattoo Detail', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.tattoo_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+        res.render('tattoocreate', { title: 'Tattoo Create'});
     }
     catch(err){
         res.status(500)
