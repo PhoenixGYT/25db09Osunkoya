@@ -62,7 +62,7 @@ exports.tattoo_list = async function(req, res) {
 exports.tattoo_view_all_Page = async function(req, res) {
     try{
         const theTattoos = await Tattoo.find();
-        res.render('tattoos', { title: 'Tattoo Search Results', results: theTattoos });
+        res.render('tattoos', { title: 'Tattoo Appointment Search Results', results: theTattoos });
     }
     catch(err){
         res.status(500);
@@ -95,7 +95,7 @@ exports.tattoo_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
         result = await Tattoo.findById( req.query.id)
-        res.render('tattoodetail', { title: 'Tattoo Detail', toShow: result });
+        res.render('tattoodetail', { title: 'Tattoo Appointment Details', toShow: result });
     }
     catch(err){
         res.status(500)
@@ -109,10 +109,24 @@ exports.tattoo_view_one_Page = async function(req, res) {
 exports.tattoo_create_Page = function(req, res) {
     console.log("create view")
     try{
-        res.render('tattoocreate', { title: 'Tattoo Create'});
+        res.render('tattoocreate', { title: 'Create Tattoo Appointment'});
     }
     catch(err){
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// Handle building the view for updating a costume.
+// query provides the id
+exports.tattoo_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await Tattoo.findById(req.query.id)
+        res.render('tattooupdate', { title: 'Update Tattoo Appointment', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+}

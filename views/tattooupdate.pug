@@ -1,0 +1,46 @@
+extends layout
+block content
+    h1= title
+    - let tattoo_id = toShow?._id
+    - let tattoocustomer = toShow?.customer
+    - let tattooduration = toShow?.duration
+    - let tattoocost = toShow?.cost
+    - let tattoocolored = toShow?.colored
+
+    form(id='TattooForm', action="/resource/tattoo", method="POST")
+        div ID is: #{tattoo_id}
+        div.form-group
+            label(for='customer') Customer 
+            input#customer(type='text', name='tattoo_customer', value=tattoocustomer)
+            input(type="hidden", name="tattoo_id", value=tattoo_id)
+        div.form-group
+            label(for='duration') Duration
+            input#duration(type='text', name='duration', value=tattooduration)
+        div.form-group
+            label(for='cost') Tattoo cost
+            input#cost(type='number', name='cost', value=tattoocost)
+        div.form-group
+            label(for='colored') Colored?
+            input#colored(type='checkbox', name='colored', checked=tattoocolored)
+        input#btn.btn(type="submit" value="Save")
+
+    script.
+        document.forms['TattooForm'].addEventListener('submit', (event) => { 
+            event.preventDefault();
+            fetch(event.target.action, {
+                method: 'PUT', // align with your Express route
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Save succeeded");
+                let submitButton = document.getElementById("btn");
+                if (submitButton) {
+                    submitButton.classList.add('btn-success');
+                }
+            }).catch((err) => {
+                alert("Save failed: " + err);
+                console.error(err);
+            });
+            });
