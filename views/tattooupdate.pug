@@ -5,13 +5,13 @@ block content
     - let tattoocustomer = toShow?.customer
     - let tattooduration = toShow?.duration
     - let tattoocost = toShow?.cost
-    - let tattoocolored = toShow?.colored
+    - let tattoocolored = toShow.colored
 
-    form(id='TattooForm', action="/resource/tattoo", method="POST")
+    form(id='TattooForm', action=`/resource/tattoo/${tattoo_id}`, method="POST")
         div ID is: #{tattoo_id}
         div.form-group
             label(for='customer') Customer 
-            input#customer(type='text', name='tattoo_customer', value=tattoocustomer)
+            input#customer(type='text', name='customer', value=tattoocustomer)
             input(type="hidden", name="tattoo_id", value=tattoo_id)
         div.form-group
             label(for='duration') Duration
@@ -34,12 +34,16 @@ block content
             }).then((resp) => {
                 return resp.json();
             }).then((body) => {
-                alert("Save succeeded");
                 let submitButton = document.getElementById("btn");
                 if (submitButton) {
                     submitButton.classList.add('btn-success');
                 }
+                alert("Save succeeded");
             }).catch((err) => {
+                let submitButton = document.getElementById("btn");
+                if (submitButton) {
+                    submitButton.classList.add('btn-danger');
+                }
                 alert("Save failed: " + err);
                 console.error(err);
             });

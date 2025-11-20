@@ -14,5 +14,8 @@ router.get('/create', tattoo_controllers.tattoo_create_Page);
 /* GET create update page */
 router.get('/update', tattoo_controllers.tattoo_update_Page);
 
+/* GET delete page */
+router.get('/delete', tattoo_controlers.tattoo_delete_Page);
 
 module.exports = router;
+

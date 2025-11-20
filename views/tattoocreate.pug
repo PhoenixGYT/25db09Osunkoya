@@ -14,10 +14,11 @@ block content
             input#cost(type='number', name='cost')
         div.form-group
             label.tattooAttr(for='colored') Colored?
-            input#colored(type='boolean', name='colored')
+            input#colored(type='checkbox', name='colored')
         input(type="submit")
     
     script.
+        document.colored = req.body.colored === "on";
         document.forms['CostumeForm'].addEventListener('submit', (event) => { 
             event.preventDefault();
             // TODO do something here to show user that form is being submitted
