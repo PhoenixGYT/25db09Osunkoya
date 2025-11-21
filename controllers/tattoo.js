@@ -31,20 +31,19 @@ try {
 };
 
 // Handle a delete one view with id from query
-exports.tatto_delete_Page = async function(req, res) {
-    console.log("Delete view for id " + req.query.id)
-    try{
-        result = await Tattoo.findById(req.query.id)
+exports.tattoo_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id);
+    try {
+        const result = await Tattoo.findById(req.query.id);
         res.render('tattoodelete', { title: 'Delete Appointment', toShow: result });
+    } catch (err) {
+        res.status(500).send({ error: err.message });
     }
-    catch(err){
-        res.status(500)
-        res.send(`{'error': '${err}'}`);
-    }
-}
+};
+
 
 // Update a Tattoo
-exports.tattoo_update_put = async function (req, res) {
+exports.tattoo_update_Page = async function (req, res) {
 console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`);
 try {
     let toUpdate = await Tattoo.findById(req.params.id);
@@ -92,7 +91,7 @@ try {
 };
 
 // Create a Tattoo (POST)
-exports.tattoo_create_post = async function (req, res) {
+exports.tattoo_create_Page = async function (req, res) {
 console.log(req.body);
 let document = new Tattoo({
     customer: req.body.customer,

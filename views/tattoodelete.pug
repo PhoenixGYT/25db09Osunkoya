@@ -1,56 +1,54 @@
 extends layout
+
 block content
-    h1= title
-    if (toShow == null)
-        h2 No instance to delete
-    else
-        - let tattoo_id = toShow._id
-        - let tattoocustomer = toShow.customer
-        - let tattooduration = toShow.duration
-        - let tattoocost = toShow.cost
-        - let tattoocolored = toShow.colored === "on"
-        - let actionid = "/resource/tattoo/" + tattoo_id
-    
-    script let actionid = "#{actionid}"
-        div
-            div.row
-                div(class='tattooAttr mr-3') Tattoo ID is:
-                div #{tattoo_id}
-            div.row
-                div(class='tattooAttr mr-3') Customer is:
-                div #{tattoocustomer}
-            div.row
-                div(class='tattooAttr mr-3') Duration is:
-                div #{tattooduration}
-            div.row
-                div(class='tattooAttr mr-3') Cost is:
-                div #{tattoocost}
-            div.row
-                div(class='tattooAttr mr-3') Colored? 
-                div #{tattoocolored}
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let tattoo_id = toShow._id
+    - let tattoocustomer = toShow.customer
+    - let tattooduration = toShow.duration
+    - let tattoocost = toShow.cost
+    - let tattoocolored = toShow.colored === "on"
+    - let actionid = "/resource/tattoo/" + tattoo_id
 
-        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
-        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    div
+      div.row
+        div(class='tattooAttr mr-3') Tattoo ID is:
+        div #{tattoo_id}
+      div.row
+        div(class='tattooAttr mr-3') Customer is:
+        div #{tattoocustomer}
+      div.row
+        div(class='tattooAttr mr-3') Duration is:
+        div #{tattooduration}
+      div.row
+        div(class='tattooAttr mr-3') Cost is:
+        div #{tattoocost}
+      div.row
+        div(class='tattooAttr mr-3') Colored?
+        div #{tattoocolored}
 
-        script.
-            function cancel() {
-                // Go back to the home page for the costume collection
-                window.location.href='/costumes'
-            }
-        script.
-            function deleteOnid() {
-                console.log("starting delete")
-                // delete first
-                fetch(actionid, {
-                    method: 'DELETE' // Don't need a body for the delete
-                }).then((resp) => {
-                    return resp.json(); // or resp.text() or whatever the server sends
-                }).then((body) => {
-                    alert("Delete succeded")
-                    window.location.href='/tattoos'
-                // TODO handle body
-                }).catch((error) => {
-                    // TODO handle error
-                    alert("Delete failed " + error )
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      let actionid = "#{actionid}"
+
+      function cancel() {
+        window.location.href='/tattoos'
+      }
+
+      function deleteOnid() {
+        console.log("starting delete")
+        fetch(actionid, {
+          method: 'DELETE'
+        }).then((resp) => {
+          return resp.json();
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/tattoos'
+        }).catch((error) => {
+          alert("Delete failed " + error)
         });
-    }
+      }

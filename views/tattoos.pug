@@ -2,13 +2,19 @@ extends layout
 
 block content
   h1 Search Results Tattoos
-  - 
 
   div.container-fluid
-      div.row
-        each person in results
-          div.col-sm-2
-            p Customer: #{person.customer}
-            p Duration (in hours): #{person.duration}
-            p Cost: #{person.cost}
-            p Colored: #{person.colored}
+    div.row
+      each person in results
+        - let destination = `dispatch("/tattoo/update?id=${person._id}")`
+        div.col-sm-2
+          p Customer: #{person.customer}
+          p Duration (in hours): #{person.duration}
+          p Cost: #{person.cost}
+          p Colored: #{person.colored}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
+
+  script.
+    function dispatch(path){
+      window.location.href = path;
+    }
