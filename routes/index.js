@@ -4,6 +4,7 @@ var router = express.Router();
 var Account = require('../models/account');
 
 router.get('/', function (req, res) {
+  console.log("Index user:", req.user);
   res.render('index', { title: 'Tattoo App', user : req.user });
 });
 
@@ -21,18 +22,18 @@ router.post('/register', function(req, res) {
     }
     let newAccount = new Account({ username : req.body.username });
     Account.register(newAccount, req.body.password, function(err, user){
-      if (err) {
-        console.log("db creation issue "+ err)
-        return res.render('register', { title: 'Registration',
-        message: 'access error', account : req.body.username })
-      }
-      if(!user){
-        return res.render('register',{ title: 'Registration',
-        message: 'access error', account : req.body.username })
-      }
-    })
-    console.log('Success, redirect');
+  if (err || !user) {
+    return res.render('register', { 
+      title: 'Registration',
+      message: 'access error',
+      account : req.body.username 
+    });
+  }
+  req.login(user, function(err) {
+    if (err) { return next(err); }
     res.redirect('/');
+  });
+  });
   })
   .catch(function (err){
     return res.render('register', { title: 'Registration',
@@ -45,6 +46,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
+  console.log("Logged in user:", req.user);
   res.redirect('/');
 });
 

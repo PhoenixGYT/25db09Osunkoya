@@ -5,12 +5,10 @@ block content
   p= "Building a pug server" 
   
   if (!user)
-    button.btn-primary
-      a(href="/login") Login
+    a.btn.btn-primary(href="/login") Login
     br
     br
-    button.btn-primary
-      a(href="/register") Register
+    a.btn.btn-primary(href="/register") Register
   if (user)
     p You are currently logged in as #{user.username}
     a(href="/tattoos") Take me to tattoos
