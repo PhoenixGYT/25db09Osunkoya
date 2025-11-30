@@ -17,6 +17,7 @@ var randomitemRouter = require('./routes/pick');
 var Tattoo = require('./models/tattoo');
 var resourceRouter = require('./routes/resource');
 const tattoo = require('./models/tattoo');
+
 var app = express();
 
 // view engine setup
@@ -32,9 +33,7 @@ app.use(require('express-session')({
   resave: false,
   saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session())
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -46,22 +45,26 @@ app.use('/resource', resourceRouter);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
-  Account.findOne({ username: username })
-  .then(function (user){
-  if (err) { return done(err); }
-  if (!user) {
-  return done(null, false, { message: 'Incorrect username.' });
-  }
-  if (!user.validPassword(password)) {
-  return done(null, false, { message: 'Incorrect password.' });
-  }
-  return done(null, user);
-  })
-  .catch(function(err){
-  return done(err)
-  })
+    Account.findOne({ username: username })
+    .then(function (user){
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    })
+    .catch(function(err){
+      return done(err)
+    })
   })
 )
 
