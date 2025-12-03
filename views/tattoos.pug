@@ -6,7 +6,7 @@ block content
   div.container-fluid
     div.row
       each person in results
-        - let destination = `dispatch("/tattoo/update?id=${person._id}")`
+        - let destination = `dispatch("/tattoos/update?id=${person._id}")`
         div.col-sm-2
           p Customer: #{person.customer}
           p Duration (in hours): #{person.duration}

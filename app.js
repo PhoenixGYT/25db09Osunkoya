@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routers AFTER passport
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tattoo', tattoosRouter);
+app.use('/tattoos', tattoosRouter);
 app.use('/grid', gridRouter);
 app.use('/randomitem', randomitemRouter);
 app.use('/resource', resourceRouter);

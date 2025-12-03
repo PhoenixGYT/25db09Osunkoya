@@ -7,21 +7,21 @@ block content
     - let tattoocost = toShow?.cost
     - let tattoocolored = toShow.colored
 
-    form(id='TattooForm', action=`/resource/tattoo/${tattoo_id}`, method="POST")
+    form(id='TattooForm', action=`/resource/tattoos/${tattoo_id}`, method="POST")
         div ID is: #{tattoo_id}
         div.form-group
             label(for='customer') Customer 
-            input#customer(type='text', name='customer', value=tattoocustomer)
+            input#customer(type='text', name='customer', value=customer)
             input(type="hidden", name="tattoo_id", value=tattoo_id)
         div.form-group
             label(for='duration') Duration
-            input#duration(type='text', name='duration', value=tattooduration)
+            input#duration(type='text', name='duration', value=duration)
         div.form-group
             label(for='cost') Tattoo cost
-            input#cost(type='number', name='cost', value=tattoocost)
+            input#cost(type='number', name='cost', value=cost)
         div.form-group
             label(for='colored') Colored?
-            input#colored(type='checkbox', name='colored', checked=tattoocolored)
+            input#colored(type='checkbox', name='colored', checked=colored)
         input#btn.btn(type="submit" value="Save")
 
     script.
@@ -34,16 +34,8 @@ block content
             }).then((resp) => {
                 return resp.json();
             }).then((body) => {
-                let submitButton = document.getElementById("btn");
-                if (submitButton) {
-                    submitButton.classList.add('btn-success');
-                }
                 alert("Save succeeded");
             }).catch((err) => {
-                let submitButton = document.getElementById("btn");
-                if (submitButton) {
-                    submitButton.classList.add('btn-danger');
-                }
                 alert("Save failed: " + err);
                 console.error(err);
             });
