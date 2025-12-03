@@ -2,10 +2,10 @@ extends layout
 block content
     h1= title
     - let tattoo_id = toShow?._id
-    - let tattoocustomer = toShow?.customer
-    - let tattooduration = toShow?.duration
-    - let tattoocost = toShow?.cost
-    - let tattoocolored = toShow.colored
+    - let customer = toShow?.customer
+    - let duration = toShow?.duration
+    - let cost = toShow?.cost
+    - let colored = toShow?.colored
 
     form(id='TattooForm', action=`/resource/tattoos/${tattoo_id}`, method="POST")
         div ID is: #{tattoo_id}
@@ -35,6 +35,7 @@ block content
                 return resp.json();
             }).then((body) => {
                 alert("Save succeeded");
+                window.location.href = `/tattoos`
             }).catch((err) => {
                 alert("Save failed: " + err);
                 console.error(err);

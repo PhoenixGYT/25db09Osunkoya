@@ -43,6 +43,29 @@ exports.tattoo_delete_Page = async function(req, res) {
 
 
 // Update a Tattoo
+// Update a Tattoo (API)
+exports.tattoo_update = async function (req, res) {
+  console.log("API update for id " + req.params.id);
+  try {
+    const updatedTattoo = await Tattoo.findByIdAndUpdate(req.params.id,
+      {
+        customer: req.body.customer,
+        duration: req.body.duration,
+        cost: req.body.cost,
+        colored: req.body.colored === "on" || req.body.colored === true
+      },
+      { new: true } // return the updated document
+    );
+
+    if (!updatedTattoo) {
+      return res.status(404).json({ error: `Document for id ${req.params.id} not found` });
+    }
+
+    res.json(updatedTattoo); // send back JSON
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 // Handle building the view for updating a costume.
 // query provides the id

@@ -6,28 +6,28 @@ block content
     h2 No instance to delete
   else
     - let tattoo_id = toShow._id
-    - let tattoocustomer = toShow.customer
-    - let tattooduration = toShow.duration
-    - let tattoocost = toShow.cost
-    - let tattoocolored = toShow.colored === "on"
+    - let customer = toShow.customer
+    - let duration = toShow.duration
+    - let cost = toShow.cost
+    - let colored = toShow.colored === "on"
     - let actionid = "/resource/tattoo/" + tattoo_id
 
-    div
-      div.row
-        div(class='tattooAttr mr-3') Tattoo ID is:
-        div #{tattoo_id}
-      div.row
-        div(class='tattooAttr mr-3') Customer is:
-        div #{tattoocustomer}
-      div.row
-        div(class='tattooAttr mr-3') Duration is:
-        div #{tattooduration}
-      div.row
-        div(class='tattooAttr mr-3') Cost is:
-        div #{tattoocost}
-      div.row
-        div(class='tattooAttr mr-3') Colored?
-        div #{tattoocolored}
+  div
+    div.row
+      div(class='tattooAttr mr-3') Tattoo ID is:
+      div #{tattoo_id}
+    div.row
+      div(class='tattooAttr mr-3') Customer is:
+      div #{customer}
+    div.row
+      div(class='tattooAttr mr-3') Duration is:
+      div #{duration}
+    div.row
+      div(class='tattooAttr mr-3') Cost is:
+      div #{cost}
+    div.row
+      div(class='tattooAttr mr-3') Colored?
+      div #{colored}
 
     button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
