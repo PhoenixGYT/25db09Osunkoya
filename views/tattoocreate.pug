@@ -2,10 +2,10 @@ extends layout
 block content
     h1= title
     
-    form(id='TattooForm', action="/resource/tattoo", method="POST")
+    form(id='TattooForm', action="/resource/tattoos", method="POST")
         div.form-group
             label.tattooAttr(for='customer') Customer
-            input#customer(type='text', name='tattoo_customer')
+            input#customer(type='text', name='customer')
         div.form-group
             label.tattooAttr(for='duration') Duration
             input#duration(type='number', name='duration', min=1)
@@ -15,11 +15,17 @@ block content
         div.form-group
             label.tattooAttr(for='colored') Colored?
             input#colored(type='checkbox', name='colored')
+        button(type=button, class="btn", onclick="cancel()") Cancel
         input(type="submit")
-    
+
+
     script.
-        document.colored = req.body.colored === "on";
-        document.forms['CostumeForm'].addEventListener('submit', (event) => { 
+        function cancel(){
+            document.forms[TattooForm].reset()
+            window.location.href = `/tattoos`
+        }
+
+        document.forms['TattooForm'].addEventListener('submit', (event) => { 
             event.preventDefault();
             // TODO do something here to show user that form is being submitted
             fetch(event.target.action, {
@@ -28,7 +34,8 @@ block content
             }).then((resp) => {
                 return resp.json(); // or resp.text() or whatever the server sends
             }).then((body) => {
-                alert("Save succeded")
+                alert("Save succeeded")
+                window.location.href = "/tattoos"
             // TODO handle body
             }).catch((error) => {
             // TODO handle error

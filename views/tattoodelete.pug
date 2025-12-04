@@ -2,44 +2,35 @@ extends layout
 
 block content
   h1= title
-  if (toShow == null)
-    h2 No instance to delete
-  else
-    - let tattoo_id = toShow._id
-    - let customer = toShow.customer
-    - let duration = toShow.duration
-    - let cost = toShow.cost
-    - let colored = toShow.colored === "on"
-    - let actionid = "/resource/tattoo/" + tattoo_id
+  - let tattoo_id = toShow?._id
+  - let customer = toShow?.customer
+  - let duration = toShow?.duration
+  - let cost = toShow?.cost
+  - let colored = toShow?.colored
+  - let actionid = "/resource/tattoos/" + tattoo_id
 
   div
     div.row
-      div(class='tattooAttr mr-3') Tattoo ID is:
-      div #{tattoo_id}
+      div(class='tattooAttr mr-3') Tattoo ID is: #{tattoo_id}
     div.row
-      div(class='tattooAttr mr-3') Customer is:
-      div #{customer}
+      div(class='tattooAttr mr-3') Customer is: #{customer}
     div.row
-      div(class='tattooAttr mr-3') Duration is:
-      div #{duration}
+      div(class='tattooAttr mr-3') Duration is: #{duration}
     div.row
-      div(class='tattooAttr mr-3') Cost is:
-      div #{cost}
+      div(class='tattooAttr mr-3') Cost is: #{cost}
     div.row
-      div(class='tattooAttr mr-3') Colored?
-      div #{colored}
-
-    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
-    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+      div(class='tattooAttr mr-3') Colored? #{colored}
+    button(type=button, class="btn btn-danger m-2", onclick="deleteOnid()") Delete
+    button(type=button, class="btn btn-secondary m-2", onclick="cancel()") Cancel
 
     script.
-      let actionid = "#{actionid}"
+      let actionid = "#{actionid}";
 
-      function cancel() {
-        window.location.href='/tattoos'
+      function cancel(){
+        window.location.href = '/tattoos'
       }
 
-      function deleteOnid() {
+      function deleteOnid(){
         console.log("starting delete")
         fetch(actionid, {
           method: 'DELETE'

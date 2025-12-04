@@ -4,15 +4,20 @@ block content
   h1 Search Results Tattoos
 
   div.container-fluid
+    button.btn(class="btn-primary ml-1", onclick=`dispatch("/tattoos/create")`) Create
     div.row
       each person in results
-        - let destination = `dispatch("/tattoos/update?id=${person._id}")`
+        - let updatePath = `dispatch("/tattoos/update?id=${person._id}")`
+        - let detailPath = `dispatch("/tattoos/detail?id=${person._id}")`
+        - let deletePath = `dispatch("/tattoos/delete?id=${person._id}")`
         div.col-sm-2
           p Customer: #{person.customer}
           p Duration (in hours): #{person.duration}
           p Cost: #{person.cost}
           p Colored: #{person.colored}
-        button.btn(class="btn-primary ml-1", onclick=destination) Update
+          button.btn(class="btn-primary ml-1", onclick=updatePath) Update
+          button.btn(class="btn-primary ml-1", onclick=detailPath) View
+          button.btn(class="btn-primary ml-1", onclick=deletePath) Delete
 
   script.
     function dispatch(path){

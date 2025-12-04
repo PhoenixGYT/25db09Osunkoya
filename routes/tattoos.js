@@ -17,12 +17,12 @@ router.get('/', tattoo_controllers.tattoo_view_all_Page);
 router.get('/detail', tattoo_controllers.tattoo_view_one_Page);
 
 /* GET create tattoo page */
-router.get('/create', tattoo_controllers.tattoo_create_Page);
+router.get('/create', secured, tattoo_controllers.tattoo_create_Page);
 
 /* GET update tattoo page */
 router.get('/update', secured, tattoo_controllers.tattoo_update_Page);
 
 /* GET delete page */
-router.get('/delete', tattoo_controllers.tattoo_delete_Page);
+router.get('/delete', secured, tattoo_controllers.tattoo_delete_Page);
 
 module.exports = router;

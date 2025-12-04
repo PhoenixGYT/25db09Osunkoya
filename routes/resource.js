@@ -10,7 +10,7 @@ var tattoo_controller = require('../controllers/tattoo');
 router.get('/', api_controller.api);
 /// Tattoo ROUTES ///
 // POST request for creating a Tattoo. 
-router.post('/tattoos', tattoo_controller.tattoo_create_Page);
+router.post('/tattoos', tattoo_controller.tattoo_create);
 // DELETE request to delete Tattoo.
 router.delete('/tattoos/:id', tattoo_controller.tattoo_delete);
 // PUT request to update Tattoo.

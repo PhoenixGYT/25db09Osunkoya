@@ -43,6 +43,7 @@ exports.tattoo_delete_Page = async function(req, res) {
 
 
 // Update a Tattoo
+
 // Update a Tattoo (API)
 exports.tattoo_update = async function (req, res) {
   console.log("API update for id " + req.params.id);
@@ -104,8 +105,20 @@ try {
 }
 };
 
+//Create Tattoo Page
+exports.tattoo_create_Page = async function(req, res) {
+console.log("Create item view ")
+try{
+res.render('tattoocreate', { title: 'Tattoo Create'});
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
 // Create a Tattoo (POST)
-exports.tattoo_create_Page = async function (req, res) {
+exports.tattoo_create = async function (req, res) {
 console.log(req.body);
 let document = new Tattoo({
     customer: req.body.customer,
